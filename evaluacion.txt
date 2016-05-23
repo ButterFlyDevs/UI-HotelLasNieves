@@ -16,4 +16,4 @@ valoración 1
 interfaz responsive 0.2
 conexión base de datos 0.2
 
-Fecha límite: 24-29
+Fecha entrega 30 mayo de las practicas 3 y 4
