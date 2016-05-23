@@ -7,6 +7,7 @@
      <link type="text/css" rel="stylesheet" href="css/uikit.gradient.min.css" />
      <!-- CSS del tema de uikit tm (útil para algunas cosas como el nav oscuro y el footer)-->
      <link type="text/css" rel="stylesheet" href="css/docs.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
 
      <!--Añadimos la librería AngularJS -->
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -25,55 +26,10 @@
 
   </head>
 
-  <body class="tm-background">
+  <body>
 
-        <!-- Barra de navegación -->
-        <nav class="tm-navbar uk-navbar uk-navbar-attached">
-            <div class="uk-container uk-container-center">
-                <!--
-                <a class="uk-navbar-brand uk-hidden-small" href="index.html"><img class="uk-margin uk-margin-remove" src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></a>
-              -->
-
-                <ul class="uk-navbar-nav uk-hidden-small">
-                    <li><a ui-sref="inicio">Inicio</a></li>
-                    <li><a ui-sref="reservas">Reservas</a>/li>
-                    <li><a ui-sref="ofertas">Ofertas</a></li>
-                    <li><a ui-sref="ocio">Ocio</a></li>
-                    <li><a ui-sref="servicios">Servicios</a></li>
-                    <li><a ui-sref="acercade">Acerca de</a></li>
-                </ul>
-
-                <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-
-                <div class="uk-navbar-brand uk-navbar-center uk-visible-small"><img src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></div>
-
-            </div>
-        </nav>
-
-         <div ui-view></div>
-
-
-        <!-- Pie de la página -->
-        <div class="tm-footer">
-            <div class="uk-container uk-container-center uk-text-center">
-
-                <ul class="uk-subnav uk-subnav-line uk-flex-center">
-                    <li><a href="https://github.com/uikit/uikit">GitHub</a></li>
-                    <li><a href="https://github.com/uikit/uikit/issues">Issues</a></li>
-                    <li><a href="https://github.com/uikit/uikit/blob/master/CHANGELOG.md">Changelog</a></li>
-                    <li><a href="https://twitter.com/getuikit">Twitter</a></li>
-                </ul>
-
-                <div class="uk-panel">
-                    <p>Made by <a href="http://www.yootheme.com">YOOtheme</a> with love and caffeine.<br class="uk-hidden-small">Licensed under <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
-                    <a href="index.html"><img src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></a>
-                </div>
-
-            </div>
-        </div>
-
-
-    </body>
+        <div ui-view></div>
+  </body>
 
 
 </html>
