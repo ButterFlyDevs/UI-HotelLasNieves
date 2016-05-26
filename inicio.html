@@ -1,81 +1,38 @@
 
-        <!--Primera sección con la imagen de fondo -->
-        <div class="tm-section " style="height: 400px; weight: 1000px; background-image: url(images/front.jpg);">
-            <div class="uk-container ">
+  <!--
+  Primera sección con la imagen de fondo.
+  Con uk-height-viewport hacemos que la imagen se intente ajustar a la altura de la página.
+  -->
+  <div class="tm-section uk-height-viewport" style="height: 400px; weight: 1000px; background-image: url(images/hotel.jpg);">
+      <div class="uk-container ">
 
-              <div class="data-uk-grid ">
+        <div class="uk-grid ">
 
-                  <div class="uk-width-small-1-2">
-                      <h1>Hotel las nieves, calidad y atención al cliente.</h1>
-                  </div>
-                  <!-- Necesario para que el boton no pise el texto -->
-                  <div class="uk-placeholder">...</div>
-                  <div class="uk-width-small-1-2">
-                      <a class="uk-button tm-button-download" ui-sref="public.historia">Historia</a>
-                  </div>
+            <div class="uk-width-1-2">
+                <h1 style="color: white;">Hotel las nieves, calidad y atención al cliente.</h1>
+                <br></br>
+                <a class="uk-button tm-button-download uk-vertical-align-bottom" ui-sref="public.historia">Historia</a>
+            </div>
 
-              </div>
+
+
+            <div class="uk-width-1-2 uk-vertical-align">
+              <img class="uk-align-medium-right uk-margin-right" style="height: 400px; weight: 1000px;" src="images/oferta.png" alt="">
+            </div>
 
             </div>
-        </div>
-
-
-        <!--Segunda sección con el video promocional -->
-
-        <div class="uk-cover" style="height: 300px;">
-           <video class="uk-cover-object" width="600" height="400" autoplay loop muted controls>
-               <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4?test1" type="video/mp4">
-               <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.ogv?test1" type="video/ogg">
-           </video>
-
-        </div>
-        <!--
-        <div class="tm-section tm-section-color-white">
-            <div class="uk-container uk-container-center uk-text-center">
-
-
-            </div>
-        </div>
-      -->
-        <!-- Tercera sección con las redes sociales -->
-        <script>window.twttr = (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0],
-                  t = window.twttr || {};
-                if (d.getElementById(id)) return t;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "https://platform.twitter.com/widgets.js";
-                fjs.parentNode.insertBefore(js, fjs);
-
-                t._e = [];
-                t.ready = function(f) {
-                  t._e.push(f);
-                };
-
-                return t;
-              }(document, "script", "twitter-wjs"));
-        </script>
-
-
-      <div class="tm-section tm-section-color-2 tm-section-colored">
-
-        <div class="uk-grid">
-
-          <div class="uk-width-1-2">
-            <a class="twitter-timeline"
-              href="https://twitter.com/hotellasnieves"
-              data-screen-name="fabric">
-            Tweets by @fabric
-            </a>
-          </div>
-
-
-          <div class="uk-width-1-2">
-            <div>
-              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FHotel-Las-Nieves-416342995067394%2Ftimeline&tabs=timeline&width=800&height=5000&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=548471218624081" width="940" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-            </div>
-          </div>
 
         </div>
 
       </div>
+  </div>
+
+
+  <!--Segunda sección con el video promocional -->
+  <div class="uk-cover" style="height: 600px;">
+     <video class="uk-cover-object" width="600" height="400" autoplay loop muted controls>
+         <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4?test1" type="video/mp4">
+         <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.ogv?test1" type="video/ogg">
+     </video>
+
+  </div>
