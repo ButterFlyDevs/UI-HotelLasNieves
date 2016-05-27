@@ -5,12 +5,15 @@
 
 <br>
 <div class="uk-container-center">
-  
+
   <form class="uk-form" ng-submit="hola()">
-      Fecha <input id="fecha" ng-change="hola()" ng-model="fecha" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" placeholder="27-05-2016">
+      Fecha <input date-time id="fecha" date-change="hola()" ng-model="fecha" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" placeholder="{{ fechaActual}}">
       <code>text = {{fecha}}</code><br/>
       <input type="submit" value="Register">
   </form>
+
+  <ng-datepicker ng-model="ctrl.date">
+</ng-datepicker>
 
 
 

@@ -168,7 +168,7 @@
                    $this.element.val(moment().format($this.options.format));
                 }
 
-                cambioDate();
+                //cambioDate();
 
             });
 
