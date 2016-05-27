@@ -27,8 +27,8 @@
             mobile: false,
             weekstart: 1,
             i18n: {
-                months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-                weekdays      : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+                months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+                weekdays      : ['Lun','Mar','Mie','Jue','Vie','Sab','Dom']
             },
             format: "YYYY-MM-DD",
             offsettop: 5,
@@ -167,6 +167,9 @@
                 if ($this.element.val() && !moment($this.element.val(), $this.options.format).isValid()) {
                    $this.element.val(moment().format($this.options.format));
                 }
+
+                cambioDate();
+
             });
 
             // init dropdown

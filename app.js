@@ -97,110 +97,234 @@ app.controller('loginController', function($scope){
 });
 
 
+// VARIABLES PARA LA VISTA DE LAS RESERVAS //
+var planta = 1;
+var fecha = '19-05-2016';
+
+//Avisador del cambio
+function cambioDate(){
+  console.log('Hola2');  
+}
 app.controller('controladorReservas', function($scope){
 
-  $scope.data="datos";
+  var reservas = [];
+  reservas.push({fecha:'06-05-2010', habitaciones:['101']})
+  reservas.push({fecha:'08-05-2010', habitaciones:['104','203','301']})
+  console.log(reservas);
+  console.log(JSON.stringify(reservas))
 
+
+
+  // Introducimos las reservas de prueba en el sistema.
+  localStorage.setItem('reservas', JSON.stringify(reservas));
+
+
+  //Inicialización del plugin, buscando si hay reservas para hoy y moidificando el canvas en consecuencia
+
+
+
+
+
+
+
+
+  //Usada para pintar el canvas con la selcción del form
+
+  //Configuración del form <select>
+  $scope.datosSelect = {
+   opciones: [
+     {id: '1', nombre: 'Planta 1'},
+     {id: '2', nombre: 'Planta 2'},
+     {id: '3', nombre: 'Planta 3'}
+   ],
+   opcionSeleccionada: {id: '1', nombre: 'Planta 1'} //This sets the default value of the select in the ui
+   };
+
+  //Función que puede ser llamada desde la vista a través del scope.
+  $scope.cambioSelectPlanta = function(){
+    console.log('CAmbio');
+    console.log($scope.datosSelect.opcionSeleccionada.id);
+    planta = $scope.datosSelect.opcionSeleccionada.id;
+
+    actualiza();
+
+
+
+  }
+
+  $scope.hola = function(){
+    console.log('HOLA');
+  //Extraemos el dato desde el campo con id='fecha'
+   console.log(document.getElementById('fecha'));
+  };
+
+
+  //Función que actualiza el canvas, modificando las variables y llamando a repintar.
+  function actualiza(){
+    /*Para actualizar los datos que necesitamos son la planta y la fecha. Con estos
+    revisamos las reservas realizadas y si alguna nos conicide pintamos la habitación como corresponda.
+    */
+    //Extraemos el objeto reservas de la base de datos:
+    var reservas = localStorage.getItem('reservas');
+    console.log('RESERVAS object: ', JSON.parse(reservas));
+    //Comporbamos si existe
+    if(reservas == null){
+      console.log('Aún no se han realizado reservas');
+    }else{
+      console.log('Reservas existentes');
+      console.log(reservas);
+    };
+
+
+
+
+
+    init();
+  }
+
+  //Función que solo puede ser llamada desde el controlador
   function openHab(){
     alert('openHab');
   };
 
+  //Creamos la variable del canvas
   var stage = new createjs.Stage("demoCanvas");
+  function init(){
 
-  // ### Habitación A ### //
-  var habA = new createjs.Shape();
-  habA.graphics.beginStroke("black");
-  habA.graphics.beginFill("Green");
-  habA.graphics.moveTo(50, 50).
-                lineTo(200, 50).
-                lineTo(200, 200).
-                lineTo(50, 200).
-                lineTo(50, 50);
 
-  habA.addEventListener("click", function(event) {
-    habA.graphics.beginFill("Red");
+    // ### Habitación A ### //
+    var habA = new createjs.Shape();
+    habA.graphics.beginStroke("black");
+    habA.graphics.beginFill("Green");
     habA.graphics.moveTo(50, 50).
                   lineTo(200, 50).
                   lineTo(200, 200).
                   lineTo(50, 200).
                   lineTo(50, 50);
-    stage.update(event);
-    openHab();
-  })
 
-  var txt = new createjs.Text();
-  txt.font = "bold 40px Arial";
-  txt.x = 90;
-  txt.y = 95;
-  txt.color = "#00000";
-  txt.text = "101";
+    habA.addEventListener("click", function(event) {
+      habA.graphics.beginFill("Red");
+      habA.graphics.moveTo(50, 50).
+                    lineTo(200, 50).
+                    lineTo(200, 200).
+                    lineTo(50, 200).
+                    lineTo(50, 50);
+      stage.update(event);
+      openHab();
+    })
 
-  stage.addChild(habA);
-  stage.addChild(txt);
+    var txtHabA = new createjs.Text();
+    txtHabA.font = "bold 40px Arial";
+    txtHabA.x = 90;
+    txtHabA.y = 95;
+    txtHabA.color = "#00000";
+    txtHabA.text = planta+"01";
+
+    stage.addChild(habA);
+    stage.addChild(txtHabA);
 
 
-  var habB = new createjs.Shape();
-  habB.graphics.beginStroke("black");
-  habB.graphics.beginFill("Green");
-  habB.graphics.moveTo(50, 200).
-                lineTo(400, 200).
-                lineTo(400, 320).
-                lineTo(150, 320).
-                lineTo(50,200);
-
-  habB.addEventListener("click", function(event) {
-    habB.graphics.beginFill("Red");
+    var habB = new createjs.Shape();
+    habB.graphics.beginStroke("black");
+    habB.graphics.beginFill("Green");
     habB.graphics.moveTo(50, 200).
                   lineTo(400, 200).
                   lineTo(400, 320).
                   lineTo(150, 320).
                   lineTo(50,200);
-    stage.update(event);
-  })
 
-  var habC = new createjs.Shape();
-  habC.graphics.beginStroke("black");
-  habC.graphics.beginFill("Green");
-  habC.graphics.moveTo(400, 200).
-                lineTo(600, 200).
-                lineTo(600, 320).
-                lineTo(400, 320).
-                lineTo(400, 200);
+    habB.addEventListener("click", function(event) {
+      habB.graphics.beginFill("Red");
+      habB.graphics.moveTo(50, 200).
+                    lineTo(400, 200).
+                    lineTo(400, 320).
+                    lineTo(150, 320).
+                    lineTo(50,200);
+      stage.update(event);
+    })
 
-  habC.addEventListener("click", function(event) {
-    habC.graphics.beginFill("Red");
-    habC.graphics.moveTo(50, 200).
-                  lineTo(200, 200).
+    var txtHabB = new createjs.Text();
+    txtHabB.font = "bold 40px Arial";
+    txtHabB.x = 210;
+    txtHabB.y = 240;
+    txtHabB.color = "#00000";
+    txtHabB.text = planta+"02";
+
+    stage.addChild(habB);
+    stage.addChild(txtHabB);
+
+    var habC = new createjs.Shape();
+    habC.graphics.beginStroke("black");
+    habC.graphics.beginFill("Green");
+    habC.graphics.moveTo(400, 200).
+                  lineTo(600, 200).
+                  lineTo(600, 320).
                   lineTo(400, 320).
-                  lineTo(150, 320).
-                  lineTo(50,200);
-    stage.update(event);
-  })
+                  lineTo(400, 200);
 
-  var habD = new createjs.Shape();
-  habD.graphics.beginStroke("black");
-  habD.graphics.beginFill("Green");
-  habD.graphics.moveTo(600, 200).
-                lineTo(800, 200).
-                lineTo(800, 320).
-                lineTo(600, 320).
-                lineTo(600, 200);
-
-  var habE = new createjs.Shape();
-  habE.graphics.beginStroke("black");
-  habE.graphics.beginFill("Green");
-  habE.graphics.moveTo(800, 320).
-                lineTo(800, 50).
-                lineTo(950, 50).
-                lineTo(950, 200).
-                lineTo(800, 320);
+    habC.addEventListener("click", function(event) {
+      habC.graphics.beginFill("Red");
+      habC.graphics.moveTo(50, 200).
+                    lineTo(200, 200).
+                    lineTo(400, 320).
+                    lineTo(150, 320).
+                    lineTo(50,200);
+      stage.update(event);
+    })
 
 
+    var txtHabC = new createjs.Text();
+    txtHabC.font = "bold 40px Arial";
+    txtHabC.x = 460;
+    txtHabC.y = 240;
+    txtHabC.color = "#00000";
+    txtHabC.text = planta+"03";
 
-  stage.addChild(habB);
-  stage.addChild(habC);
-  stage.addChild(habD);
-  stage.addChild(habE);
-  stage.update();
+    stage.addChild(habC);
+    stage.addChild(txtHabC);
+
+    var habD = new createjs.Shape();
+    habD.graphics.beginStroke("black");
+    habD.graphics.beginFill("Green");
+    habD.graphics.moveTo(600, 200).
+                  lineTo(800, 200).
+                  lineTo(800, 320).
+                  lineTo(600, 320).
+                  lineTo(600, 200);
+
+    var txtHabD = new createjs.Text();
+    txtHabD.font = "bold 40px Arial";
+    txtHabD.x = 660;
+    txtHabD.y = 240;
+    txtHabD.color = "#00000";
+    txtHabD.text = planta+"04";
+
+    stage.addChild(habD);
+    stage.addChild(txtHabD);
+
+
+    var habE = new createjs.Shape();
+    habE.graphics.beginStroke("black");
+    habE.graphics.beginFill("Green");
+    habE.graphics.moveTo(800, 320).
+                  lineTo(800, 50).
+                  lineTo(950, 50).
+                  lineTo(950, 200).
+                  lineTo(800, 320);
+
+
+    var txtHabE = new createjs.Text();
+    txtHabE.font = "bold 40px Arial";
+    txtHabE.x = 840;
+    txtHabE.y = 95;
+    txtHabE.color = "#00000";
+    txtHabE.text = planta+"05";
+
+    stage.addChild(habE);
+    stage.addChild(txtHabE);
+
+    stage.update();
+  }
+  init();
 
 });
