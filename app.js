@@ -68,10 +68,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
            url:'/acercade',
            templateUrl:'acercade.html',
          })
-         .state('public.historia',{
-           url:'/historia',
-           templateUrl:'historia.html',
-         })
          .state('admin',{
            url:'/admin',
            templateUrl:'admin.html',
