@@ -99,86 +99,39 @@ app.controller('loginController', function($scope){
 });
 
 
-// VARIABLES PARA LA VISTA DE LAS RESERVAS //
-//Por defecto:
-var planta = 1;
-var fecha = '19-05-2016';
-//Lista de habitaciones de la vista: 1-> ocupada 0->libre
-var habitaciones=[0,0,0,0,0];
-
-//Avisador del cambio
-function cambioDate(){
-  console.log('cambioDate');
-  //Cambiamos los datos modificando la fecha y llamamos a actualizar
-  //angular.element(document.getElementById('controladorReservas')).scope();
-  console.log(document.getElementById('fecha').value);
-  fecha=document.getElementById('fecha').value;
-
-  actualiza2();
-
-}
-
-
-//Función que actualiza el canvas, modificando las variables y llamando a repintar.
-function actualiza2(){
-  /*Para actualizar los datos que necesitamos son la planta y la fecha. Con estos
-  revisamos las reservas realizadas y si alguna nos conicide pintamos la habitación como corresponda.
-  */
-  habitaciones=[0,0,0,0,0];
-
-  console.log('Variables');
-  console.log(planta);
-  console.log(fecha);
-  console.log('Habitaciones');
-  console.log(habitaciones);
-
-  //Extraemos el objeto reservas de la base de datos:
-  var reservas = localStorage.getItem('reservas');
-  console.log('RESERVAS object: ', JSON.parse(reservas));
-  //Comporbamos si existe
-  if(reservas == null){
-    console.log('Aún no se han realizado reservas');
-  }else{
-    console.log('Reservas existentes');
-    console.log(reservas);
-  };
-
-  //Trabajamos con el objeto de javascript
-  reservas = JSON.parse(reservas);
-
-  //Comprobamos si existen reservas para esa fecha:
-  for(var i=0; i<reservas.length; i++){
-    console.log(fecha);
-    if(reservas[i].fecha==fecha){
-      console.log('FECHA COINCIDENTE');
-      //Ahora cargamos en el vector habitaciones las que haya para esta fecha para la planta que se está visualizando:
-      for(var j=0; j<reservas[i].habitaciones.length; j++){
-        //Extraemos la habitación que es.
-        var habitacion=reservas[i].habitaciones[j].substring(2,3);
-        console.log('habitacion: '+habitacion);
-        //Si la habitación coincide con la planta
-        if(planta==reservas[i].habitaciones[j].substring(0,1)){
-          //Se marca como ocupada
-          habitaciones[habitacion-1]=1;
-        }
-      }
-    }
-  };
-
-  console.log('Habitaciones');
-  console.log(habitaciones);
 
 
 
 
-
-
-  //init();
-}
 
 app.controller('controladorReservas', function($scope){
 
+  // VARIABLES PARA LA VISTA DE LAS RESERVAS //
 
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  }
+
+  if(mm<10) {
+      mm='0'+mm
+  }
+
+  var fecha = dd+'-'+mm+'-'+yyyy;
+
+
+
+  //Por defecto:
+  var planta = 1;
+  //var fecha = '19-05-2016';
+  //Lista de habitaciones de la vista: 1-> ocupada 0->libre
+  var habitaciones=[0,0,0,0,0];
+
+  $scope.numHabitacionesLibres = 0;
 
   var reservas = [];
   reservas.push({fecha:'28-05-2016', habitaciones:['101']})
@@ -214,30 +167,105 @@ app.controller('controladorReservas', function($scope){
    opcionSeleccionada: {id: '1', nombre: 'Planta 1'} //This sets the default value of the select in the ui
    };
 
+
+
+
+
+  // ### CAMBIO DE PLANTA ### //
   //Función que puede ser llamada desde la vista a través del scope.
   $scope.cambioSelectPlanta = function(){
     console.log('CAmbio');
     console.log($scope.datosSelect.opcionSeleccionada.id);
     planta = $scope.datosSelect.opcionSeleccionada.id;
-
     actualiza2();
-
-
-
   }
 
-
+  // ### CAMBIO DE FECHA ### //
   //Lanzamos un escuchador de jQuery que escuche los eventos producidos:
   jQuery(document).ready(function()
   {
       jQuery("#fecha").on("hide.uk.datepicker", function (event)
       {
-        alert('HI');
+        //Ejecución cuando se produce un cambio en la fecha.
+        console.log(document.getElementById('fecha').value);
+        fecha=document.getElementById('fecha').value;
+        actualiza2();
       });
   });
 
 
 
+  //Función que actualiza el canvas, modificando las variables y llamando a repintar.
+  function actualiza2(){
+    console.log('PROCESO DE ACTUALIZACIÓN');
+    /*Para actualizar los datos que necesitamos son la planta y la fecha. Con estos
+    revisamos las reservas realizadas y si alguna nos conicide pintamos la habitación como corresponda.
+    */
+    habitaciones=[0,0,0,0,0];
+
+    console.log('Variables');
+    console.log(planta);
+    console.log(fecha);
+    console.log('Habitaciones');
+    console.log(habitaciones);
+
+    //Extraemos el objeto reservas de la base de datos:
+    var reservas = localStorage.getItem('reservas');
+    console.log('RESERVAS object: ', JSON.parse(reservas));
+    //Comporbamos si existe
+    if(reservas == null){
+      console.log('Aún no se han realizado reservas');
+    }else{
+      console.log('Reservas existentes');
+      console.log(reservas);
+    };
+
+    //Trabajamos con el objeto de javascript
+    reservas = JSON.parse(reservas);
+
+    //Comprobamos si existen reservas para esa fecha:
+    var fechaCoincidente = false;
+    for(var i=0; i<reservas.length; i++){
+      console.log(fecha);
+      if(reservas[i].fecha==fecha){
+        console.log('FECHA COINCIDENTE');
+        fechaCoincidente = true;
+        $scope.numHabitacionesLibres=15-reservas[i].habitaciones.length;
+        console.log(15-reservas[i].habitaciones.length);
+        //Ahora cargamos en el vector habitaciones las que haya para esta fecha para la planta que se está visualizando:
+        for(var j=0; j<reservas[i].habitaciones.length; j++){
+          //Extraemos la habitación que es.
+          var habitacion=reservas[i].habitaciones[j].substring(2,3);
+          console.log('habitacion: '+habitacion);
+          //Si la habitación coincide con la planta
+          if(planta==reservas[i].habitaciones[j].substring(0,1)){
+            //Se marca como ocupada
+            habitaciones[habitacion-1]=1;
+          }
+        }
+      }
+    };
+    if(!fechaCoincidente){
+      console.log('Fecha no coincidente');
+      //si no coincide la fecha es que está todo libre:
+      $scope.numHabitacionesLibres=15; //3plantas x 5 habitaciones.
+      $scope.$apply();
+    }else{
+    //  $scope.$apply();
+      console.log('Hola');
+      $scope.$applyAsync();
+    }
+
+
+
+    console.log('Habitaciones');
+    console.log(habitaciones);
+
+    //Llamamos para que repinte
+    init();
+
+
+  }
 
 
 
@@ -291,7 +319,13 @@ app.controller('controladorReservas', function($scope){
     // ### Habitación A ### //
     var habA = new createjs.Shape();
     habA.graphics.beginStroke("black");
-    habA.graphics.beginFill("Green");
+
+    //Comprobamos el color del que tiene que pintarse la habitación.
+    if(habitaciones[0]==0)
+      habA.graphics.beginFill("Green");
+    else
+      habA.graphics.beginFill("Red");
+
     habA.graphics.moveTo(50, 50).
                   lineTo(200, 50).
                   lineTo(200, 200).
@@ -322,7 +356,10 @@ app.controller('controladorReservas', function($scope){
 
     var habB = new createjs.Shape();
     habB.graphics.beginStroke("black");
-    habB.graphics.beginFill("Green");
+    if(habitaciones[1]==0)
+      habB.graphics.beginFill("Green");
+    else
+      habB.graphics.beginFill("Red");
     habB.graphics.moveTo(50, 200).
                   lineTo(400, 200).
                   lineTo(400, 320).
@@ -351,7 +388,10 @@ app.controller('controladorReservas', function($scope){
 
     var habC = new createjs.Shape();
     habC.graphics.beginStroke("black");
-    habC.graphics.beginFill("Green");
+    if(habitaciones[2]==0)
+      habC.graphics.beginFill("Green");
+    else
+      habC.graphics.beginFill("Red");
     habC.graphics.moveTo(400, 200).
                   lineTo(600, 200).
                   lineTo(600, 320).
@@ -381,7 +421,10 @@ app.controller('controladorReservas', function($scope){
 
     var habD = new createjs.Shape();
     habD.graphics.beginStroke("black");
-    habD.graphics.beginFill("Green");
+    if(habitaciones[3]==0)
+      habD.graphics.beginFill("Green");
+    else
+      habD.graphics.beginFill("Red");
     habD.graphics.moveTo(600, 200).
                   lineTo(800, 200).
                   lineTo(800, 320).
@@ -401,7 +444,10 @@ app.controller('controladorReservas', function($scope){
 
     var habE = new createjs.Shape();
     habE.graphics.beginStroke("black");
-    habE.graphics.beginFill("Green");
+    if(habitaciones[4]==0)
+      habE.graphics.beginFill("Green");
+    else
+      habE.graphics.beginFill("Red");
     habE.graphics.moveTo(800, 320).
                   lineTo(800, 50).
                   lineTo(950, 50).
@@ -424,5 +470,9 @@ app.controller('controladorReservas', function($scope){
 
 
   init();
+
+  //Llamamos a acutaliza2 para la configuración inicial:
+  actualiza2();
+
 
 });
