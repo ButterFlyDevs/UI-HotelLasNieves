@@ -226,8 +226,30 @@ app.controller('controladorReservas', function($scope){
 
   }
 
+
+  //Lanzamos un escuchador de jQuery que escuche los eventos producidos:
+  jQuery(document).ready(function()
+  {
+      jQuery("#fecha").on("hide.uk.datepicker", function (event)
+      {
+        alert('HI');
+      });
+  });
+
+
+
+
+
+
+
+
+
+
+
   $scope.hola = function(){
-    console.log('HOLA');
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
+    console.log('HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa');
   //Extraemos el dato desde el campo con id='fecha'
    console.log(document.getElementById('fecha'));
   };
