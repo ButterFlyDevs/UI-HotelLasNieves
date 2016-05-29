@@ -103,6 +103,9 @@ app.controller('loginController', function($scope){
 app.controller('controladorReservas', function($scope){
 
   // VARIABLES PARA LA VISTA DE LAS RESERVAS //
+  var reservasRealizadas = [];
+
+
 
   var today = new Date();
   var dd = today.getDate();
@@ -130,10 +133,11 @@ app.controller('controladorReservas', function($scope){
   $scope.numHabitacionesLibres = 0;
 
   var reservas = [];
+  console.log('Inicialización de la Base de Datos en memoria');
   reservas.push({fecha:'28-05-2016', habitaciones:['101']})
   reservas.push({fecha:'29-05-2016', habitaciones:['104','203','301']})
-  console.log(reservas);
-  console.log(JSON.stringify(reservas))
+  console.log(reservas); //En objetos
+  console.log(JSON.stringify(reservas)); //En json
 
   $scope.fechaActual=fecha;
 
@@ -164,7 +168,51 @@ app.controller('controladorReservas', function($scope){
    };
 
 
+ //Añade una habitación a la reserva
+ $scope.addHabitacion = function(numHab, precioHab){
+   console.log('Call addHabitacion')   ;
+   reservasRealizadas.push({fecha:fecha, habitacion:numHab, precio:precioHab})
+   console.log(reservasRealizadas);
+   $scope.reservasRealizadas=reservasRealizadas;
 
+   //Calculamos el precio total:
+   var precioAcum=0;
+   for(var i=0; i<reservasRealizadas.length; i++){
+     precioAcum+=reservasRealizadas[i].precio;
+   }
+   $scope.precioTotal=precioAcum;
+   //$scope.$apply();
+
+   /*Cuando añadimos una habitación a la reserva hay que mararla roja en el canvas
+   para eso modificamos el vecotr de habitaciones (usado para ver el color del dibujo)*/
+   console.log('add habitacion !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+   console.log(habitaciones);
+
+   //Hay que realizar la reserva, revistando el objetos reservas
+     //si existen reservas para esa fecha se añaden a esta
+     var coincideFecha=false;
+     for(var i=0; i<reservas.length; i++){
+       if(reservas[i].fecha==fecha){
+         console.log('Coincide fecha');
+         coincideFecha=true;
+         reservas[i].habitaciones.push(numHab);
+         console.log(reservas[i].habitaciones);
+       }
+     };
+     //si no existen reservas para esa fecha, se introduce sin más
+     if(!coincideFecha){
+       reservas.push({fecha:fecha, habitaciones:[numHab]})
+     }
+     console.log('Reservas tras la addHabitacion)');
+     console.log(reservas);
+
+     //Se guarda en la base de datos:
+     localStorage.setItem('reservas', JSON.stringify(reservas));
+
+   console.log(habitaciones);
+   //Para que repinte el canvas
+   actualiza2();
+ }
 
 
   // ### CAMBIO DE PLANTA ### //
@@ -302,9 +350,22 @@ app.controller('controladorReservas', function($scope){
     init();
   }
 
-  //Función que solo puede ser llamada desde el controlador
-  function openHab(){
-    alert('openHab');
+  //Función que es llamada por los manejadores de eventos de las figuras del canvas.
+  function openHab(numHab){
+    //alert(numHab);
+
+    //Segun la habitación que sea vamos a pasarle algunos datos al modal para que se concrete un poco.
+    $scope.numHab=numHab;
+    $scope.precioHab=35;
+
+    //Aplicamos los cambios al scope.
+    $scope.$apply();
+
+    //Referenciamos al modal que está definido en la vista en reservas.html
+    var modal = UIkit.modal("#Modal101");
+    //Lo lanzamos
+    modal.show();
+
   };
 
   //Creamos la variable del canvas
@@ -329,14 +390,14 @@ app.controller('controladorReservas', function($scope){
                   lineTo(50, 50);
 
     habA.addEventListener("click", function(event) {
-      habA.graphics.beginFill("Red");
-      habA.graphics.moveTo(50, 50).
-                    lineTo(200, 50).
-                    lineTo(200, 200).
-                    lineTo(50, 200).
-                    lineTo(50, 50);
-      stage.update(event);
-      openHab();
+      //Si la habitación está reservada:
+      if(habitaciones[0]==1){
+        //Lanzamos un mensaje de que no se puede seleccionar.
+         $.UIkit.notify("Habitación selecionada no disponible.", {status:'warning'});
+      }else{
+        //realizamos el procedimiento normal.
+        openHab(planta+'01');
+      }
     })
 
     var txtHabA = new createjs.Text();

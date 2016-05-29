@@ -6,16 +6,18 @@
       <!-- Loading UI-KIT CSS Framework -->
      <link type="text/css" rel="stylesheet" href="css/uikit.gradient.min.css" />
      <link type="text/css" rel="stylesheet" href="css/components/datepicker.gradient.min.css" />
+
      <link type="text/css" rel="stylesheet" href="css/components/form-select.gradient.min.css" />
      <!-- CSS del tema de uikit tm (útil para algunas cosas como el nav oscuro y el footer)-->
      <link type="text/css" rel="stylesheet" href="css/docs.css">
      <link type="text/css" rel="stylesheet" href="css/slider.css">
      <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /
 
 
 
-     <!-- Añadido formato, daba error en la consola -->
-     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+     
+
      <!--Añadimos la librería AngularJS -->
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
      <!--Librería de enrutamiento -->
@@ -25,33 +27,41 @@
 
      <script src="js/utils.js"></script>
     <!-- Para slider de fotos -->
-<script src="js/slider.js"></script>
-<!-- Necesario para notificaciones flotantes -->
-  <link type="text/css" rel="stylesheet" href="css/components/notify.gradient.css" />
-  <script type="text/javascript" src="js/components/notify.js"></script>
+  <!--  <script src="js/slider.js"></script>-->
+    <!-- Necesario para notificaciones flotantes -->
+      <link type="text/css" rel="stylesheet" href="css/components/notify.gradient.css" />
+      <script type="text/javascript" src="js/components/notify.js"></script>
+
+
+
 
      <!--Query-->
      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
      <!--Modulos de JavaScript necesarios para que uikit funcione-->
      <script src="js/uikit.min.js"></script>
-<<<<<<< HEAD
 
 
-<script src="js/components/datepicker.js"></script>
-     <script src="js/components/form-select.js"></script>
-=======
->>>>>>> 4384930f7e698a55809a44b610819935568a753d
+    <!--Componentes -->
+
+    <script src="js/components/datepicker.js"></script>
+    <script src="js/components/form-select.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/components/notify.gradient.css" />
+    <script type="text/javascript" src="js/components/notify.js"></script>
 
      <!--Lib de twitter -->
      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
      </script>
      <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 
+
+
   </head>
 
 
   <!--Llamamos a la función aprovisionar() definida en js/utils.js para que carge los datos en el Local Storage del navegador -->
   <body onload="aprovisionar()">
+
         <div ui-view></div>
   </body>
 

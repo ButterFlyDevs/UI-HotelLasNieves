@@ -1,7 +1,11 @@
+
+
 <div style="background-color: white;">
 
 <div class="uk-container">
 <h1 class="uk-margin-top">Realización Reservas</h1>
+
+
 
 <br>
 <div class="uk-container-center">
@@ -18,7 +22,6 @@
     </div>
 
   </div>
-
 
   <div class="uk-grid">
 
@@ -46,7 +49,153 @@
 </div>
 
 <div>
-  <canvas id="demoCanvas" width="1000" height="500"></canvas>
+  <canvas id="demoCanvas" width="1000" height="400"></canvas>
 </div>
+
+
+<div class="uk-panel uk-panel-box uk-width" style="width: 400px;">
+  <div class="uk-panel-header">
+    <h3 class="uk-panel-title"><i class="uk-icon-bed"></i>   Resumen</h3>
+  </div>
+
+      <h4 ng-if="!reservasRealizadas">Aún no se ha realizado ninguna reserva.</h4>
+
+      <div ng-if="reservasRealizadas">
+      <table class="uk-table">
+        <thead>
+            <tr>
+                <th>Habitación</th>
+                <th>Fecha</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="reserva in reservasRealizadas">
+            <tr>
+                <td>{{reserva.habitacion}}</td>
+                <td>{{reserva.fecha}}</td>
+                <td>{{reserva.precio}} €</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <h3 style="display: inline;"><strong>Total {{precioTotal}} € </strong></h3>    <a class="uk-align-right" data-uk-modal="{target:'#modalPago'}" >Finalizar <i class="uk-icon-play"></i> </a>
+    </div>
+
+
 </div>
+
+<div class="uk-margin-large-top">
+</div>
+
+</div>
+
+
+</div>
+
+<!--Definición del modal de pago -->
+<div id="modalPago" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-modal-header"><h3>Realización de pago</h3></div>
+
+        Datos Personales
+        <hr>
+        <form class="uk-form">
+
+            <fieldset data-uk-margin>
+                <input type="text" placeholder="Nombre"> <input type="text" placeholder="Apellidos">
+                <br>
+                <input placeholder="Fecha nac" id="fecha" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" > <input type="text" placeholder="Teléfono"> <input type="text" placeholder="DNI">
+                <br>
+                <input type="text" placeholder="Dirección">
+                <input type="text" placeholder="Correo">
+
+                <br>
+                <br>
+                Datos Pago
+                <hr>
+                <input type="text" placeholder="Titular">
+                <br>
+                <input type="text" placeholder="Numero Tarjeta">  <input type="text" placeholder="CVC">
+
+
+                <h3 class="uk-align-center">Importe total: {{precioTotal}} €</h3>
+
+            </fieldset>
+
+          </form>
+
+        <div class="uk-modal-footer">
+          <button class="uk-button uk-button-success">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- DEFINICIÓN DE LAS HABITACIONES -->
+<!--Definición del mensaje que se muestra -->
+<div id="Modal101" class="uk-modal" aria-hidden="true">
+  <div class="uk-modal-dialog uk-modal-dialog">
+
+    <div class="uk-modal-header"><h3>Habitación {{numHab}}</h3></div>
+
+    <div class="uk-grid">
+        <div class="uk-width-1-2">
+          <strong>Características</strong>
+          <ul class="uk-list uk-list-line">
+            <li>Capacidad: 1-5 personas</li>
+            <li>Balcón Minibar TV 30"</li>
+            <li>Baño completo</li>
+            <li>Hidromasaje</li>
+            <li>Vistas a la sierra</li>
+          </ul>
+
+          <form name="myForm" class="uk-form">
+            <div class="uk-grid">
+              <div class="uk-width-1-2">
+                  <p>Adultos</p>
+                  <select>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>1 pareja</option>
+                      <option>2 parejas</option>
+                  </select>
+             </div>
+             <div class="uk-width-1-2">
+                  <p>Niños</p>
+                  <select>
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                  </select>
+             </div>
+            </div>
+          </form>
+
+          <h3>Precio: {{precioHab}}€ </h3>
+
+        </div>
+
+        <div class="uk-width-1-2">
+          <img class="uk-align-medium-right uk-margin-right" style="height: 300px;" src="images/room1.jpg" alt="">
+          <!--
+          <ul class="uk-slideshow" data-uk-slideshow="{autoplay:true}">
+              <li><img src="images/room1.jpg" alt="" width="" height="" alt=""></li>
+              <li><img src="images/room2.jpg" alt="" width="" height="" alt=""></li>
+          </ul>
+        -->
+        </div>
+
+
+    </div>
+
+    <div class="uk-modal-footer">
+      <button id="sendButton" ng-click="addHabitacion(numHab, precioHab)" class="uk-button uk-button-success  uk-modal-close">Reservar</button>
+      <button id="CancelButton" class="uk-button uk-button-danger uk-modal-close " >Cancelar</button>
+    </div>
+
+  </div>
 </div>
