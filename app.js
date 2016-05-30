@@ -35,12 +35,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
        $urlRouterProvider.otherwise('/inicio');
        //#Configuración de estados:
        $stateProvider
-         //Configura la URL principal
-
-         /*
-
-        */
-
          .state('public',{
            templateUrl:'publicTemplate.html',
          })
@@ -70,16 +64,26 @@ app.config(function($stateProvider, $urlRouterProvider) {
            url:'/acercade',
            templateUrl:'acercade.html',
          })
+
          .state('admin',{
            url:'/admin',
-           templateUrl:'admin.html',
+           templateUrl:'loginAdmin.html',
+         })
+
+         .state('mainAdmin',{
+           //url:'/mainAdmin',
+           templateUrl:'mainAdmin.html',
+         })
+         .state('mainAdmin.reservas',{
+           url:'/adminreservas',
+           templateUrl:'mainAdminReservas.html',
          });
 
 });//Final de config. de las rutas.
 
 
 
-app.controller('loginController', function($scope){
+app.controller('loginController', function($scope, $location){
 
 
     $scope.login = function (credenciales) {
@@ -88,6 +92,7 @@ app.controller('loginController', function($scope){
 
       if (credenciales.username == 'admin' && credenciales.password=='admin'){
         console.log('Usuario con permisos');
+        $location.path('/adminreservas');
       }
 
     };
