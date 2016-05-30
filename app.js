@@ -134,8 +134,8 @@ app.controller('controladorReservas', function($scope){
 
   var reservas = [];
   console.log('Inicialización de la Base de Datos en memoria');
-  reservas.push({fecha:'28-05-2016', habitaciones:['101']})
-  reservas.push({fecha:'29-05-2016', habitaciones:['104','203','301']})
+  reservas.push({fecha:'30-05-2016', habitaciones:['101']});
+  reservas.push({fecha:'31-05-2016', habitaciones:['104','203','301']});
   console.log(reservas); //En objetos
   console.log(JSON.stringify(reservas)); //En json
 
