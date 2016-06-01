@@ -3,12 +3,10 @@
   Primera sección con la imagen de fondo.
   Con uk-height-viewport hacemos que la imagen se intente ajustar a la altura de la página.
   -->
-  <div class="tm-section uk-height-viewport" style="height: 400px; weight: 1000px; background-image: url(images/hotel.jpg);">
-      <div class="uk-container ">
-
-        <div class="uk-grid">
-
-            <div class="uk-width-1-2">
+  <div class="tm-section uk-height-viewport" style="height: 500px; widht: 1000px; background-image: url(images/hotel.jpg);">
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+      <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-2 uk-row-first">
                 <h1 style="color: white;">Hotel las nieves, calidad y atención al cliente.</h1>
                 <br></br><br></br><br></br><br></br>
                 <a data-uk-modal="{target:'#Modal'}" class="uk-button tm-button-download uk-vertical-align-bottom">Historia</a>
@@ -18,7 +16,7 @@
                         <!--Definición del mensaje que se muestra -->
                         <div id="Modal" class="uk-modal" aria-hidden="true">
                           <div class="uk-modal-dialog uk-modal-dialog-large ">
-
+                            <a class="uk-modal-close uk-close"></a>
                             <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
                               <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-2 uk-row-first">
@@ -59,11 +57,6 @@
 
             </div>
 
-
-
-            <div class="uk-width-1-2">
-              <img class="uk-align-medium-right uk-margin-right" style="height: 400px; weight: 1000px;" src="images/oferta.png" alt="">
-            </div>
 
             </div>
 
