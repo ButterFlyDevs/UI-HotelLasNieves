@@ -1,0 +1,17 @@
+#contenedor{
+  background-color: white;
+
+}
+#img{
+  max-height: 250px;
+  max-width: 250px;
+  height: 250px;
+}
+#descuentoNoche{
+
+
+}
+.secciones{
+    float: left;
+    
+}

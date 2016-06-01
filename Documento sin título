@@ -1,0 +1,91 @@
+<style>
+.linea{
+  display: inline;
+}
+.seccion{
+float: left;
+margin-top: 15px;
+  max-width: 30%;
+  margin-left: 15px;
+}
+.bloque{
+display: block;
+
+margin-top: 15px;
+
+margin-left:  15px;
+
+
+}
+#titulo{
+max-width: 250px;
+}
+input[type=text]{
+max-width: 30px;
+}
+</style>
+
+
+
+
+<button class="uk-button" data-uk-modal="{target:'#my-id'}"  >modal</button>
+<div class="uk-modal" id="my-id">
+
+    <div class="seccion">
+<input type="file" id="files" name="files[]" />
+     <br />
+     <output id="list"></output>
+     <label><input type="checkbox" > Nº de noches</label>
+  <div id="descuentonoches">
+     <input type="text" class="linea"> X
+     <input type="text" class="linea">
+</div>
+</div>
+     <script>
+
+   </script>
+<div class="seccion">
+   <div class="uk-form-row">
+      <input type="text" placeholder="" value="Titulo" id="titulo">
+  </div>
+  <div class="uk-form-row">
+    <textarea cols="" rows="" placeholder="">Descripcion</textarea>
+      <div id="fechaInicio">
+         <form class="uk-form" ng-submit="hola()">
+            Fecha Inicio <input id="fechaInicio" type="text"  data-uk-datepicker="{format:'DD-MM-YYYY'}" >
+        </form></div>
+      <div id="fechaFin">
+        <form class="uk-form" ng-submit="hola()">
+           Fecha fin <input id="fechaFin" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" >
+       </form>
+        <div>
+          <label><input type="checkbox" > % precio</label>
+        </div>
+           <input type="text" > %
+
+      </div>
+      <button class="uk-button uk-button-primary" type="button" data-uk-button>Aceptar</button>
+      <button class="uk-button uk-button-primary" type="button" data-uk-button>Cancelar</button>
+    </div>
+
+  </div>
+      <div class="seccion">
+        Categoria
+        <label class="bloque"><input type="checkbox"  > Descuento</label>
+        <label class="bloque"><input type="checkbox" > Comida</label>
+        <label class="bloque"><input type="checkbox" > Ocio </label>
+        Habitacion
+        <input type="text" >
+        <br>Nº de habitacion/es
+        <label class="bloque"><input type="checkbox" > todas</label>
+        <div>
+            <label class="bloque"><input type="checkbox" > Plus</label>
+            <div class="uk-form-row" class="bloque">
+               <input type="text" placeholder="" value="Titulo"  style="">
+           </div>
+           <div class="uk-form-row" class="bloque">
+             <textarea cols="" rows="" placeholder="">Descripcion</textarea>
+             </div>
+        </div>
+    </div>
+</div>
