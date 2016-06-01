@@ -1,5 +1,5 @@
 .slide{
-    width: 600px;
+    width: 500px;
     height: 300px;
     margin: 2% auto;
     border-radius: .5em;
@@ -8,7 +8,7 @@
 }
 
 .slide img{
-    width: 600px;
+    width: 500px;
     height: 300px;
     position: absolute;
 }
