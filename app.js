@@ -73,6 +73,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
          .state('mainAdmin.reservas',{
            url:'/adminreservas',
            templateUrl:'mainAdminReservas.html',
+         })
+         .state('mainAdmin.ofertas',{
+           url:'/adminofertas',
+           templateUrl:'mainAdminOfertas.html',
+         })
+         .state('mainAdmin.otros',{
+           url:'/adminotros',
+           templateUrl:'mainAdminOtros.html',
          });
 
 });//Final de config. de las rutas.
@@ -155,7 +163,7 @@ app.controller('controladorReservas', function($scope){
   localStorage.setItem('reservas', JSON.stringify(reservas));
   console.log('Reservas en base de datos');
 
-  alert(localStorage.length);
+  //alert(localStorage.length);
 
 
 
@@ -210,8 +218,8 @@ app.controller('controladorReservas', function($scope){
    //Hay que realizar la reserva, revistando el objetos reservas
      //si existen reservas para esa fecha se añaden a esta
      var coincideFecha=false;
-     alert(reservas.length);
-     alert(reservas);
+     //alert(reservas.length);
+     //alert(reservas);
      for(var i=0; i<reservas.length; i++){
 
        console.log('Buscando coincidencia Fecha');
