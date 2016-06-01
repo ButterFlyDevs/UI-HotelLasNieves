@@ -1,0 +1,145 @@
+
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="css/uikit.gradient.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/components/datepicker.gradient.min.css" />
+<link type="text/css" rel="stylesheet" href="css/administracion.css" />
+  <link type="text/css" rel="stylesheet" href="css/components/form-select.gradient.min.css" />
+  <!-- CSS del tema de uikit tm (útil para algunas cosas como el nav oscuro y el footer)-->
+  <link type="text/css" rel="stylesheet" href="css/docs.css">
+  <link type="text/css" rel="stylesheet" href="css/slider.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="icon" href="images/logo.png">
+  <title>Hotel las Nieves</title>
+
+
+
+
+  <!--Añadimos la librería AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <!--Librería de enrutamiento -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
+  <!--Añadimos el fichero de la propia aplicación -->
+  <script src="app.js"></script>
+
+  <script src="js/utils.js"></script>
+ <!-- Para slider de fotos -->
+ <script src="js/slider.js"></script>
+ <!-- Necesario para notificaciones flotantes -->
+   <link type="text/css" rel="stylesheet" href="css/components/notify.gradient.css" />
+   <script type="text/javascript" src="js/components/notify.js"></script>
+
+
+
+
+  <!--Query-->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!--Modulos de JavaScript necesarios para que uikit funcione-->
+  <script src="js/uikit.min.js"></script>
+
+
+ <!--Componentes -->
+
+ <script src="js/components/datepicker.js"></script>
+ <script src="js/components/form-select.js"></script>
+
+ <link type="text/css" rel="stylesheet" href="css/components/notify.gradient.css" />
+ <script type="text/javascript" src="js/components/notify.js"></script>
+
+  <!--Lib de twitter -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  </script>
+  <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+</head>
+<body>
+<button class="uk-button" data-uk-modal="{target:'#contenedor'}">Abrir</button>
+
+<div id="contenedor" class="uk-modal">
+  <div class="uk-modal-dialog uk-modal-dialog-large">
+    <a class="uk-modal-close uk-close"></a>
+
+    <div class="uk-modal-header">Añadir oferta</div>
+
+    <div class="uk-grid">
+      <div class="uk-width-1-3">
+        <div id="img">
+          <input type="file" id="files" name="files[]" />
+          <br/>
+          <output id="list"></output>
+          <script src="js/administracion.js"></script>
+        </div>
+        <div >
+          <form  class="uk-form" >
+          <label><input type="checkbox" > Nº de noches</label><br>
+
+          <input type="text"  class="uk-form-width-mini"> X
+          <input type="text"  class="uk-form-width-mini">
+        </form>
+        </div>
+      </div>
+      <div class="uk-width-1-3">
+        <div id="titulo">
+          <div class="uk-form-row">
+             <input type="text" placeholder="" value="Titulo" id="titulo">
+         </div>
+         <div class="uk-form-row">
+           <textarea cols="" rows="" placeholder="">Descripcion</textarea>
+         </div>
+         <form class="uk-form" ng-submit="hola()">
+            Fecha Inicio <input id="fechaInicio" type="text"  data-uk-datepicker="{format:'DD-MM-YYYY'}" >
+        </form>
+        <form class="uk-form" ng-submit="hola()">
+           Fecha fin <input id="fechaFin" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" >
+       </form>
+        </div>
+        <div id="descuentoporcentaje">
+            <label><input type="checkbox" > % precio</label>
+            <div class="uk-form-row">
+               <input type="text" placeholder="" >
+           </div>
+        </div>
+      </div>
+      <div class="uk-width-1-3">
+          Categoria<br><br><br>
+          <label><input type="checkbox"  > Descuento</label><br><br>
+          <label><input type="checkbox" > Comida</label><br><br>
+          <label><input type="checkbox" > Ocio </label><br><br>
+          Habitacion
+          <div class="uk-form-row">
+             <input type="text" placeholder="" value="Nº de habitacion/es "  style="">
+         </div>
+
+          <label><input type="checkbox" > todas</label>
+
+          <label><input type="checkbox" > Plus</label>
+          <div class="uk-form-row">
+             <input type="text" placeholder="" value="Titulo"  style="">
+         </div>
+         <div class="uk-form-row">
+           <textarea cols="" rows="" placeholder="">Descripcion</textarea>
+           </div>
+
+      </div>
+    </div>
+      <div class="uk-modal-footer" >
+        <button class="uk-button uk-button-success" type="button">Aceptar</button>
+        <button class="uk-button uk-button-danger" type="button">Cancelar</button>
+      </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
