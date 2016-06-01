@@ -5,10 +5,6 @@ app.controller('TodoListController', function($scope) {
   $scope.test="avion";
 
 });
-
-
-app
-
 /*
 
   Más info en: http://www.w3schools.com/html/html5_webstorage.asp
@@ -127,7 +123,14 @@ app.controller('controladorReservas', function($scope){
 
   var fecha = dd+'-'+mm+'-'+yyyy;
 
+  var ddTomorrow = today.getDate();
+  ddTomorrow+=1;
+  if(ddTomorrow<10) {
+      ddTomorrow='0'+ddTomorrow
+  }
 
+  var fechaTomorrow= ddTomorrow+'-'+mm+'-'+yyyy;
+  console.log(fechaTomorrow);
 
   //Por defecto:
   var planta = 1;
@@ -139,8 +142,9 @@ app.controller('controladorReservas', function($scope){
 
   var reservas = [];
   console.log('Inicialización de la Base de Datos en memoria');
-  reservas.push({fecha:'30-05-2016', habitaciones:['101']});
-  reservas.push({fecha:'31-05-2016', habitaciones:['104','203','301']});
+  //Para hoy:
+  reservas.push({fecha:fecha, habitaciones:['101']});
+  reservas.push({fecha:fechaTomorrow, habitaciones:['104','203','301']});
   console.log(reservas); //En objetos
   console.log(JSON.stringify(reservas)); //En json
 
@@ -149,6 +153,16 @@ app.controller('controladorReservas', function($scope){
 
   // Introducimos las reservas de prueba en el sistema.
   localStorage.setItem('reservas', JSON.stringify(reservas));
+  console.log('Reservas en base de datos');
+
+  alert(localStorage.length);
+
+
+
+  //La sacamos para ver el contenido
+  var reservas2 = localStorage.getItem('reservas');
+  console.log('RESERVAS object: ', JSON.parse(reservas2));
+  console.log(reservas2);
 
 
   //Inicialización del plugin, buscando si hay reservas para hoy y moidificando el canvas en consecuencia
@@ -196,7 +210,14 @@ app.controller('controladorReservas', function($scope){
    //Hay que realizar la reserva, revistando el objetos reservas
      //si existen reservas para esa fecha se añaden a esta
      var coincideFecha=false;
+     alert(reservas.length);
+     alert(reservas);
      for(var i=0; i<reservas.length; i++){
+
+       console.log('Buscando coincidencia Fecha');
+       console.log(reservas[i].fecha);
+       console.log(fecha);
+
        if(reservas[i].fecha==fecha){
          console.log('Coincide fecha');
          coincideFecha=true;
@@ -206,7 +227,7 @@ app.controller('controladorReservas', function($scope){
      };
      //si no existen reservas para esa fecha, se introduce sin más
      if(!coincideFecha){
-       reservas.push({fecha:fecha, habitaciones:[numHab]})
+       reservas.push({fecha:fecha, habitaciones:[numHab]});
      }
      console.log('Reservas tras la addHabitacion)');
      console.log(reservas);
@@ -275,7 +296,10 @@ app.controller('controladorReservas', function($scope){
     //Comprobamos si existen reservas para esa fecha:
     var fechaCoincidente = false;
     for(var i=0; i<reservas.length; i++){
+      console.log('Fecha actual');
       console.log(fecha);
+      console.log('Fecha reserva');
+      console.log(reservas[i].fecha);
       if(reservas[i].fecha==fecha){
         console.log('FECHA COINCIDENTE');
         fechaCoincidente = true;
@@ -429,13 +453,14 @@ app.controller('controladorReservas', function($scope){
                   lineTo(50,200);
 
     habB.addEventListener("click", function(event) {
-      habB.graphics.beginFill("Red");
-      habB.graphics.moveTo(50, 200).
-                    lineTo(400, 200).
-                    lineTo(400, 320).
-                    lineTo(150, 320).
-                    lineTo(50,200);
-      stage.update(event);
+      //Si la habitación está reservada:
+      if(habitaciones[1]==1){
+        //Lanzamos un mensaje de que no se puede seleccionar.
+         $.UIkit.notify("Habitación selecionada no disponible.", {status:'warning'});
+      }else{
+        //realizamos el procedimiento normal.
+        openHab(planta+'02');
+      }
     })
 
     var txtHabB = new createjs.Text();
@@ -461,13 +486,14 @@ app.controller('controladorReservas', function($scope){
                   lineTo(400, 200);
 
     habC.addEventListener("click", function(event) {
-      habC.graphics.beginFill("Red");
-      habC.graphics.moveTo(50, 200).
-                    lineTo(200, 200).
-                    lineTo(400, 320).
-                    lineTo(150, 320).
-                    lineTo(50,200);
-      stage.update(event);
+      //Si la habitación está reservada:
+      if(habitaciones[2]==1){
+        //Lanzamos un mensaje de que no se puede seleccionar.
+         $.UIkit.notify("Habitación selecionada no disponible.", {status:'warning'});
+      }else{
+        //realizamos el procedimiento normal.
+        openHab(planta+'03');
+      }
     })
 
 
@@ -493,6 +519,18 @@ app.controller('controladorReservas', function($scope){
                   lineTo(600, 320).
                   lineTo(600, 200);
 
+    habD.addEventListener("click", function(event) {
+      //Si la habitación está reservada:
+      if(habitaciones[3]==1){
+        //Lanzamos un mensaje de que no se puede seleccionar.
+         $.UIkit.notify("Habitación selecionada no disponible.", {status:'warning'});
+      }else{
+        //realizamos el procedimiento normal.
+        openHab(planta+'04');
+      }
+    })
+
+
     var txtHabD = new createjs.Text();
     txtHabD.font = "bold 40px Arial";
     txtHabD.x = 660;
@@ -516,7 +554,16 @@ app.controller('controladorReservas', function($scope){
                   lineTo(950, 200).
                   lineTo(800, 320);
 
-
+    habE.addEventListener("click", function(event) {
+      //Si la habitación está reservada:
+      if(habitaciones[4]==1){
+        //Lanzamos un mensaje de que no se puede seleccionar.
+         $.UIkit.notify("Habitación selecionada no disponible.", {status:'warning'});
+      }else{
+        //realizamos el procedimiento normal.
+        openHab(planta+'05');
+      }
+    })
     var txtHabE = new createjs.Text();
     txtHabE.font = "bold 40px Arial";
     txtHabE.x = 840;
